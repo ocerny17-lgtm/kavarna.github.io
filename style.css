@@ -113,6 +113,33 @@ section h2 {
     gap: 16px;
 }
 
+.sugar-row {
+    max-width: 240px;
+}
+
+.milk-toggle {
+    display: flex;
+    gap: 10px;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    color: #555;
+    transition: all 0.2s ease;
+}
+
+.toggle-btn.active {
+    border-color: #667eea;
+    color: #667eea;
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.2);
+}
+
 .drink-card {
     background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     border-radius: 16px;

@@ -3,6 +3,8 @@ let orders = (JSON.parse(localStorage.getItem('cafeOrders')) || []).map(order =>
     ...order,
     status: order.status || (order.completed ? 'done' : 'new'),
     barista: order.barista || null,
+    withMilk: typeof order.withMilk === 'boolean' ? order.withMilk : true,
+    sugarSpoons: Number.isFinite(order.sugarSpoons) ? order.sugarSpoons : 0,
     completed: false // sjednocení stavu
 }));
 
@@ -14,6 +16,7 @@ document.addEventListener('DOMContentLoaded', initializeApp);
 function initializeApp() {
     displayOrders();
     setupOrderButtons();
+    setupMilkToggle();
     setupLoginHandling();
     startAllTimers();
     applyRoleUi();
@@ -22,6 +25,21 @@ function initializeApp() {
 function setupOrderButtons() {
     document.querySelectorAll('.order-btn').forEach(btn => {
         btn.addEventListener('click', () => handleDrinkOrder(btn.dataset.coffee));
+    });
+}
+
+function setupMilkToggle() {
+    const toggleContainer = document.getElementById('milkToggle');
+    if (!toggleContainer) return;
+
+    toggleContainer.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const value = btn.dataset.milk === 'true';
+            document.getElementById('withMilk').value = value ? 'true' : 'false';
+
+            toggleContainer.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
     });
 }
 
@@ -50,6 +68,8 @@ function handleDrinkOrder(coffeeType) {
 
     const customerName = document.getElementById('customerName').value.trim();
     const extraWishes = document.getElementById('extraWishes').value.trim();
+    const withMilk = document.getElementById('withMilk').value === 'true';
+    const sugarSpoons = Math.max(0, parseInt(document.getElementById('sugarSpoons').value, 10) || 0);
 
     if (!customerName) {
         alert('Prosím vyplňte jméno, abychom věděli, komu nápoj patří.');
@@ -61,6 +81,8 @@ function handleDrinkOrder(coffeeType) {
         customerName,
         coffeeType,
         extraWishes,
+        withMilk,
+        sugarSpoons,
         status: 'new',
         barista: null,
         date: new Date().toLocaleString('cs-CZ'),
@@ -71,6 +93,9 @@ function handleDrinkOrder(coffeeType) {
     localStorage.setItem('cafeOrders', JSON.stringify(orders));
 
     document.getElementById('extraWishes').value = '';
+    document.getElementById('sugarSpoons').value = '0';
+    document.getElementById('withMilk').value = 'true';
+    setupMilkToggle(); // reset active state
     displayOrders();
     startTimer(order.id);
     showNotification('Objednávka byla úspěšně odeslána! ☕');
@@ -137,6 +162,12 @@ function createOrderCard(order) {
             <div class="order-details">
                 <div class="order-detail-item">
                     <strong>Nápoj:</strong> ${escapeHtml(order.coffeeType)}
+                </div>
+                <div class="order-detail-item">
+                    <strong>Mléko:</strong> ${order.withMilk ? 'Ano' : 'Ne'}
+                </div>
+                <div class="order-detail-item">
+                    <strong>Cukr:</strong> ${order.sugarSpoons || 0} ${order.sugarSpoons === 1 ? 'lžička' : (order.sugarSpoons >= 2 && order.sugarSpoons <= 4 ? 'lžičky' : 'lžiček')}
                 </div>
                 ${order.extraWishes ? `<div class="order-detail-item"><strong>Poznámka:</strong> ${escapeHtml(order.extraWishes)}</div>` : ''}
                 <div class="timer" id="timer-${order.id}">Čas: 0:00</div>

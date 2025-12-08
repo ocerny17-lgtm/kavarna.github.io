@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>☕ Kavárna doma u Ondry a Anet</h1>
+            <h1>☕ Kavárna u Ondry a Anet</h1>
             <p class="subtitle">Všechno zdarma, s láskou připraveno</p>
             <button class="login-btn" id="loginBtn">Přihlásit se (Barista)</button>
         </header>
@@ -24,6 +24,20 @@
                     </div>
 
                     <p class="form-hint">Vyberte nápoj kliknutím na kartu a odešlete objednávku.</p>
+
+                    <div class="form-group">
+                        <label>Chcete mléko?</label>
+                        <div class="milk-toggle" id="milkToggle">
+                            <button type="button" class="toggle-btn active" data-milk="true">S mlékem</button>
+                            <button type="button" class="toggle-btn" data-milk="false">Bez mléka</button>
+                        </div>
+                        <input type="hidden" id="withMilk" value="true">
+                    </div>
+
+                    <div class="form-group sugar-row">
+                        <label for="sugarSpoons">Počet lžiček cukru:</label>
+                        <input type="number" id="sugarSpoons" name="sugarSpoons" min="0" max="10" value="0">
+                    </div>
 
                     <div class="drink-grid">
                         <div class="drink-card">
