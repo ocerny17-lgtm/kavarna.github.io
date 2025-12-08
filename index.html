@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kavárna doma u Ondry a Anet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☕ Kavárna doma u Ondry a Anet</h1>
+            <p class="subtitle">Všechno zdarma, s láskou připraveno</p>
+            <button class="login-btn" id="loginBtn">Přihlásit se (Barista)</button>
+        </header>
+
+        <main>
+            <section class="order-form-section">
+                <h2>Vyberte si nápoj</h2>
+                <div class="order-form">
+                    <div class="form-group">
+                        <label for="customerName">Vaše jméno:</label>
+                        <input type="text" id="customerName" name="customerName" required placeholder="Zadejte vaše jméno">
+                    </div>
+
+                    <p class="form-hint">Vyberte nápoj kliknutím na kartu a odešlete objednávku.</p>
+
+                    <div class="drink-grid">
+                        <div class="drink-card">
+                            <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80" alt="Latte Macchiato">
+                            <div class="drink-info">
+                                <h3>Latte Macchiato</h3>
+                                <p>Jemné espresso s nadýchaným mlékem.</p>
+                            </div>
+                            <button type="button" class="order-btn" data-coffee="Latte Macchiato">Objednat</button>
+                        </div>
+
+                        <div class="drink-card">
+                            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Cappuccino">
+                            <div class="drink-info">
+                                <h3>Cappuccino</h3>
+                                <p>Vyvážené espresso s mléčnou pěnou.</p>
+                            </div>
+                            <button type="button" class="order-btn" data-coffee="Cappuccino">Objednat</button>
+                        </div>
+
+                        <div class="drink-card">
+                            <img src="https://images.unsplash.com/photo-1432107294469-414527cb5c65?auto=format&fit=crop&w=600&q=80" alt="Lungo">
+                            <div class="drink-info">
+                                <h3>Lungo</h3>
+                                <p>Prodloužené espresso s jemnou chutí.</p>
+                            </div>
+                            <button type="button" class="order-btn" data-coffee="Lungo">Objednat</button>
+                        </div>
+
+                        <div class="drink-card">
+                            <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=600&q=80" alt="Šrot">
+                            <div class="drink-info">
+                                <h3>Šrot</h3>
+                                <p>Silná dávka kofeinu pro odvážné.</p>
+                            </div>
+                            <button type="button" class="order-btn" data-coffee="Šrot">Objednat</button>
+                        </div>
+
+                        <div class="drink-card">
+                            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80" alt="Rozpustná káva">
+                            <div class="drink-info">
+                                <h3>Rozpustná káva</h3>
+                                <p>Rychlá, ale stále připravená s láskou.</p>
+                            </div>
+                            <button type="button" class="order-btn" data-coffee="Rozpustná káva">Objednat</button>
+                        </div>
+
+                        <div class="drink-card">
+                            <img src="https://images.unsplash.com/photo-1504541961305-9c05070cf0b4?auto=format&fit=crop&w=600&q=80" alt="Čaj">
+                            <div class="drink-info">
+                                <h3>Čaj</h3>
+                                <p>Hřejivý čaj podle aktuální nabídky.</p>
+                            </div>
+                            <button type="button" class="order-btn" data-coffee="Čaj">Objednat</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="extraWishes">Poznámka (volitelné):</label>
+                        <textarea id="extraWishes" name="extraWishes" rows="3" placeholder="Máte speciální přání?"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <section class="orders-section">
+                <h2>Aktivní objednávky</h2>
+                <div id="ordersList" class="orders-list">
+                    <p class="no-orders">Zatím žádné objednávky</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Přihlášení baristy</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Uživatelské jméno:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Heslo:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="submit-btn">Přihlásit se</button>
+                <p id="loginError" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
